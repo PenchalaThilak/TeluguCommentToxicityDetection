@@ -5,9 +5,18 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import re
 from deep_translator import GoogleTranslator
 import os
+import gdown
 
-# Path to the model directory (relative to the app directory)
+# Path to the model directory
 model_path = "./indic_bert_toxicity_classifier_corrected"
+
+# Download the model if it doesn't exist
+if not os.path.exists(model_path):
+    print("Downloading model from Google Drive...")
+    model_url = "https://drive.google.com/file/d/18of1l7TSasaxxmqxRZ3-t1bdmV2ojO5Y/view?usp=drive_link"  # Replace YOUR_FILE_ID with the actual file ID
+    gdown.download(model_url, "indic_bert_toxicity_classifier_corrected.zip", quiet=False)
+    print("Unzipping model...")
+    os.system("unzip indic_bert_toxicity_classifier_corrected.zip -d .")
 
 # Determine device (GPU if available, else CPU)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
