@@ -13,7 +13,7 @@ model_path = "./indic_bert_toxicity_classifier_corrected"
 # Download the model if it doesn't exist
 if not os.path.exists(model_path):
     print("Downloading model from Google Drive...")
-    model_url = "https://drive.google.com/file/d/18of1l7TSasaxxmqxRZ3-t1bdmV2ojO5Y/view?usp=drive_link"  # Replace YOUR_FILE_ID with the actual file ID
+    model_url = "https://drive.google.com/file/d/18of1l7TSasaxxmqxRZ3-t1bdmV2ojO5Y/view?usp=sharing"  # Replace YOUR_FILE_ID with the actual file ID
     gdown.download(model_url, "indic_bert_toxicity_classifier_corrected.zip", quiet=False)
     print("Unzipping model...")
     os.system("unzip indic_bert_toxicity_classifier_corrected.zip -d .")
