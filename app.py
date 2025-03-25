@@ -6,6 +6,7 @@ import re
 from deep_translator import GoogleTranslator
 import os
 import gdown
+import subprocess
 
 # Path to the model directory
 model_path = "./indic_bert_toxicity_classifier_corrected"
@@ -13,10 +14,24 @@ model_path = "./indic_bert_toxicity_classifier_corrected"
 # Download the model if it doesn't exist
 if not os.path.exists(model_path):
     print("Downloading model from Google Drive...")
-    model_url = "https://drive.google.com/uc?id=18of1l7TSasaxxmqxRZ3-t1bdmV2ojO5Y"  # Replace YOUR_FILE_ID with the actual file ID
-    gdown.download(model_url, "indic_bert_toxicity_classifier_corrected.zip", quiet=False)
+    model_url = "https://drive.google.com/uc?id=18of1l7TSasaxxmqxRZ3-t1bdmV2ojO5Y"  # Corrected URL
+    zip_path = "indic_bert_toxicity_classifier_corrected.zip"
+    try:
+        gdown.download(model_url, zip_path, quiet=False)
+    except Exception as e:
+        raise Exception(f"Failed to download model: {str(e)}")
+
     print("Unzipping model...")
-    os.system("unzip indic_bert_toxicity_classifier_corrected.zip -d .")
+    try:
+        result = subprocess.run(["unzip", zip_path, "-d", "."], capture_output=True, text=True)
+        if result.returncode != 0:
+            raise Exception(f"Failed to unzip model: {result.stderr}")
+    except Exception as e:
+        raise Exception(f"Unzip error: {str(e)}")
+
+# Verify the model directory exists
+if not os.path.exists(model_path):
+    raise Exception(f"Model directory {model_path} not found after unzipping. Check the zip file structure.")
 
 # Determine device (GPU if available, else CPU)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
