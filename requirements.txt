@@ -1,6 +1,7 @@
-gradio==5.23.0
-torch
-transformers
-deep-translator
-opencv-python
-gdown
+gradio==4.44.0
+httpx==0.28.1
+transformers==4.44.0
+deep-translator==1.11.4
+torch==2.1.0
+gdown==5.2.0
+numpy<2
