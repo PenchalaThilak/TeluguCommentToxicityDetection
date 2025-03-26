@@ -55,6 +55,11 @@ def clean_text(text):
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
+# Function to check if the text contains Telugu characters
+def is_telugu_text(text):
+    # Telugu Unicode range: \u0C00-\u0C7F
+    return bool(re.search(r'[\u0C00-\u0C7F]', text))
+
 # Function to transliterate English to Telugu using deep-translator
 def transliterate_to_telugu(text):
     try:
@@ -64,12 +69,22 @@ def transliterate_to_telugu(text):
         return f"Error in transliteration: {str(e)}. Please try again or use a different input format."
 
 # Function to predict toxicity
-def predict_toxicity(english_text):
+def predict_toxicity(input_text):
     try:
-        telugu_text = transliterate_to_telugu(english_text)
-        if "Error in transliteration" in telugu_text:
-            return telugu_text
+        # Check if the input is already in Telugu script
+        if is_telugu_text(input_text):
+            # If the input is already Telugu, skip transliteration
+            telugu_text = input_text
+        else:
+            # Otherwise, transliterate from English to Telugu
+            telugu_text = transliterate_to_telugu(input_text)
+            if "Error in transliteration" in telugu_text:
+                return telugu_text
+
+        # Clean the Telugu text
         cleaned_text = clean_text(telugu_text)
+
+        # Tokenize and predict using the transformer model
         inputs = tokenizer(cleaned_text, return_tensors="pt", padding=True, truncation=True, max_length=128)
         inputs = {k: v.to(device) for k, v in inputs.items()}
         with torch.no_grad():
@@ -128,6 +143,5 @@ with gr.Blocks() as interface:
         outputs=output
     )
 
-# Launch the interface on the port specified by Render
-port = int(os.getenv("PORT", 10000))  # Render sets PORT environment variable
-interface.launch(server_name="0.0.0.0", server_port=port, share=False)
+# Launch the interface (Hugging Face Spaces handles port binding automatically)
+interface.launch()
