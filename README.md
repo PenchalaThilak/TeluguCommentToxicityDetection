@@ -1,5 +1,11 @@
 # 🗣️ Telugu Text Toxicity Classifier 🇮🇳
 
+> **💬 Ever posted something on social media and received a flood of comments — some supportive, some funny, but some... painfully abusive?**  
+> In today's digital world, comment sections are a mixed bag. This app helps you **automatically filter out toxic or personal Telugu comments** before they affect your mental peace.  
+> Whether you're a content creator, moderator, or developer, this tool gives you the power to protect your space online. 🛡️
+
+---
+
 A powerful web application that classifies **Telugu comments** as 🔴 **Toxic** or 🟢 **Non-Toxic**.
 
 Built with:
@@ -8,13 +14,13 @@ Built with:
 - 📦 Hugging Face Spaces for hosting
 - 🗃️ MySQL database with Flask API on Render
 
+
 ---
 
 ## 🚀 Live Demo
 
 🎯 [Launch App on Hugging Face Spaces](https://huggingface.co/spaces/<your-username>/telugu-toxicity-classifier)  
 🧠 [Model on Hugging Face Hub](https://huggingface.co/Thilak118/indic-bert-toxicity-classifier)  
-🔧 [Backend API (Render)](https://<your-render-backend-url>)
 
 ---
 
