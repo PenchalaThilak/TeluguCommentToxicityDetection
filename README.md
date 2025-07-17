@@ -1,112 +1,117 @@
 # 🗣️ Telugu Text Toxicity Classifier 🇮🇳
 
-This project is a **web app** that classifies Telugu comments as **toxic** or **non-toxic**.  
-It supports both:
-- 🔡 English-transliterated Telugu (e.g., `neeku` → `నీకు`)
-- 📝 Direct Telugu script input
+A powerful web application that classifies **Telugu comments** as 🔴 **Toxic** or 🟢 **Non-Toxic**.
 
-🧠 Powered by a fine-tuned **IndicBERT model**  
-🌐 Deployed on **Hugging Face Spaces**  
-📦 Uses **Gradio UI** for frontend  
-🗃️ Logs all predictions in a **MySQL database** via **Flask API** hosted on **Render**
+Built with:
+- 🤖 Fine-tuned ALBERT (IndicBERT) model
+- 🎛️ Gradio frontend UI
+- 📦 Hugging Face Spaces for hosting
+- 🗃️ MySQL database with Flask API on Render
 
 ---
 
 ## 🚀 Live Demo
 
-🔗 [Try it on Hugging Face Spaces](https://huggingface.co/spaces/Thilak118/teluguCommentToxicityDetection)  
+🎯 [Launch App on Hugging Face Spaces](https://huggingface.co/spaces/<your-username>/telugu-toxicity-classifier)  
+🧠 [Model on Hugging Face Hub](https://huggingface.co/Thilak118/indic-bert-toxicity-classifier)  
+🔧 [Backend API (Render)](https://<your-render-backend-url>)
 
 ---
 
-## ✅ Features
+## 🔥 Features
 
-- 🔤 Accepts English-style Telugu or direct Telugu input
-- 🔁 Transliterates using Google Translate
-- 🧠 Classifies text as **Toxic** or **Non-Toxic**
-- 📈 Displays prediction with **confidence %**
-- 💾 Logs every comment, prediction, and score to a MySQL database
-- 👁️ Admin dashboard for viewing, adding, and deleting logs
+✅ Accepts **Telugu text** via:
+- English-transliterated input (e.g., `neeku` → `నీకు`)
+- Direct Telugu script (e.g., `నీకు`)
 
----
-
-## 🧾 Usage Instructions
-
-### ✏️ Input Options
-
-#### 🔹 Option 1: English Transliterated
-1. Type: `neeku antha scene ledu`
-2. Click **"Preview Transliteration"**
-3. Review Telugu script and edit if needed
-
-#### 🔹 Option 2: Direct Telugu
-- Enter Telugu directly in the preview textbox
-
-### 🔍 Predict Toxicity
-Click **"Predict Toxicity"**  
-You’ll get:
-- Transliterated/cleaned Telugu text
-- Prediction (`Toxic` or `Non-Toxic`)
-- Confidence score (in %)
+🔁 Transliterates automatically using **Google Translate**  
+🧠 Predicts if the text is **Toxic / Non-Toxic**  
+📈 Displays **confidence score** (%)  
+💾 **Logs predictions** to a MySQL database (hosted on Render)  
+🧾 Admin can **view / add / delete** logs
 
 ---
 
-## 🧪 Examples
+## ✍️ Usage Instructions
 
-| Input (Transliterated)                     | Telugu Script                                   | Prediction | Confidence |
-|-------------------------------------------|--------------------------------------------------|------------|------------|
-| `neeku antha scene ledu le`               | `నీకు అంత సీన్ లేదు లే`                         | Toxic      | 95.23%     |
-| `meeru naaku oka korika kshaminchali`     | `మీరు నాకు ఒక కోరిక క్షమించాలి`                | Non-Toxic  | 87.65%     |
+### 1️⃣ Input Options
 
----
+**Option 1: English Transliteration**
+- Enter: `neeku antha scene ledu`
+- Click **Preview Transliteration** → `నీకు అంత సీన్ లేదు`
+- Review and edit if needed
 
-## 🧠 Model Info
-
-- **Name**: `indic_bert_toxicity_classifier_corrected`
-- **Base**: `ai4bharat/indic-bert` (ALBERT)
-- **Task**: Binary classification — Toxic vs Non-Toxic
-- **Deployed**: Inside the Hugging Face Space (no external downloads)
+**Option 2: Direct Telugu**
+- Type Telugu directly into the preview textbox
 
 ---
 
-## 🗃️ Database Integration
-
-This app uses a **MySQL database** to **log predictions** in real-time.
-
-### 🔐 Hosted on:
-- **Render** (Flask API)
-- **freesqldatabase.com** (MySQL DB hosting)
-
-### 📋 Data Stored:
-| Field           | Type    | Description                               |
-|----------------|---------|-------------------------------------------|
-| `id`           | INT     | Auto-incremented ID                       |
-| `comment`      | TEXT    | Original user comment (English form)      |
-| `transliterated_text` | TEXT | Telugu script version of the comment |
-| `prediction`   | VARCHAR | Toxic or Non-Toxic                        |
-| `confidence`   | FLOAT   | Confidence % of prediction                |
-
-### 🌐 API Endpoints (Flask)
-| Endpoint               | Method | Description                  |
-|------------------------|--------|------------------------------|
-| `/logs`                | GET    | View all logs                |
-| `/logs`                | POST   | Add a new prediction log     |
-| `/logs/<int:id>`       | DELETE | Delete a specific log        |
+### 2️⃣ Predict Toxicity
+- Click **Predict Toxicity**
+- You’ll see:
+  - 🌀 Transliterated/cleaned Telugu
+  - ⚠️ Prediction: `Toxic` or `Non-Toxic`
+  - 📊 Confidence Score (%)
 
 ---
 
-## 🧑‍💻 Local Installation
+## 🧪 Sample Inputs
+
+| Input                          | Telugu Script                          | Prediction   | Confidence |
+|-------------------------------|----------------------------------------|--------------|------------|
+| `neeku antha scene ledu le`   | `నీకు అంత సీన్ లేదు లే`               | 🔴 Toxic     | 95.23%     |
+| `meeru naaku oka korika`      | `మీరు నాకు ఒక కోరిక`                  | 🟢 Non-Toxic | 87.65%     |
+
+---
+
+## 🧠 Model Details
+
+- 🔍 **Model**: [`Thilak118/indic-bert-toxicity-classifier`](https://huggingface.co/Thilak118/indic-bert-toxicity-classifier)
+- 🏗️ **Base**: ai4bharat/indic-bert (ALBERT)
+- 🧠 **Task**: Binary Classification (Toxic vs Non-Toxic)
+- 💾 **Deployed inside** Hugging Face Space (no external download needed)
+- 📊 **AUC**: 0.93, **Accuracy**: 86%
+
+---
+
+## 🗃️ Database Logging System
+
+### 📌 What is Stored
+
+| Field               | Description                                      |
+|--------------------|--------------------------------------------------|
+| `id`               | Auto-generated ID                                |
+| `comment`          | Original user comment (English-style Telugu)     |
+| `transliterated_text` | Cleaned Telugu script version                |
+| `prediction`       | `Toxic` or `Non-Toxic`                           |
+| `confidence`       | Prediction confidence (e.g., `93.4%`)            |
+
+### 🌐 Backend API Endpoints (Flask + Render)
+
+| Route                 | Method | Description                  |
+|----------------------|--------|------------------------------|
+| `/logs`              | GET    | View all logs                |
+| `/logs`              | POST   | Add a new log entry          |
+| `/logs/<id>`         | DELETE | Delete a log by ID           |
+
+📍 **Database**: Hosted on [freesqldatabase.com](https://www.freesqldatabase.com/)  
+🛠️ **API**: Hosted on [Render](https://render.com)
+
+---
+
+## 💻 Run Locally (Optional)
 
 ```bash
-# 1. Clone the repository
+# 1. Clone the Space
 git clone https://huggingface.co/spaces/<your-username>/telugu-toxicity-classifier
 cd telugu-toxicity-classifier
 
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Run Gradio app
+# 3. Launch Gradio app
 python app.py
 
-# 4. Run Flask API (optional)
+# 4. Run backend (optional)
 cd backend
 python main.py
